@@ -3,8 +3,10 @@
     class="alert alert-warning" 
     *ngIf="form.errors">
       Invalid Login
-    </div>
-    <p> {{ form.errors | json }} </p>
+  </div>
+  <p> {{ form.errors | json }} </p>
+  <div formGroupName="account">
+    <!-- Username -->
     <div class="form-group">
         <label for="username">Username</label>
         <input
@@ -13,6 +15,7 @@
             type="text" 
             class="form-control">
     </div>
+    <!-- Username validation messages -->
     <div *ngIf="username.pending">Checking for uniqueness...</div>
     <div (onKey)="onKeyup(username)" 
       class="alert alert-danger" 
@@ -22,20 +25,24 @@
         <div *ngIf="username.errors.cannotContainSpaces"> Username cannot contain spaces</div>
         <div *ngIf="username.errors.shouldBeUnique">The username {{username.errors.shouldBeUnique.currentValue}} is already taken</div>
       </div>
-      <p *ngIf="username.errors"> {{ username.errors | json }} </p>
-    <div class="form-group">
+      <p *ngIf="username.errors"> {{ username.errors | json }} </p>    
+    <!-- Password-->
+     <div class="form-group">
         <label for="password">Password</label>
         <input 
             formControlName="password"
             id="password" 
             type="text" 
             class="form-control">
-    </div>
-    <div
-      *ngIf="password.touched && password.invalid" 
-      class="alert alert-danger">
-      Password is required
-    </div>
-    <p *ngIf="password.errors"> {{ password.errors | json }} </p>
+      </div>
+      <!-- password validation messages -->
+      <div
+        *ngIf="password.touched && password.invalid" 
+        class="alert alert-danger">
+        Password is required
+      </div>
+      <p *ngIf="password.errors"> {{ password.errors | json }} </p>      
+  </div>
+  
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>
