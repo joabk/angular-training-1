@@ -13,7 +13,7 @@
         <div *ngIf="username.errors.minlength"> Username should be minimum {{ username.errors.minlength.requiredLength }} characters</div>
         <div *ngIf="username.errors.required"> Username is required</div>
         <div *ngIf="username.errors.cannotContainSpaces"> Username cannot contain spaces</div>
-        <div *ngIf="username.errors.shouldBeUnique">The username {{username.errors.shouldBeUnique.currentValue}} is already taken</div>
+        <div *ngIf="username.errors.shouldBeUnique">The username {{username.errors.shouldBeUniquecurrentValue}} is already taken</div>
       </div>
       <p> {{ username.errors | json }} </p>
     <div class="form-group">
@@ -29,5 +29,6 @@
       class="alert alert-danger">
       Password is required
     </div>
+    <p> {{ password.errors | json }} </p>
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>

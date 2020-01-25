@@ -12,7 +12,9 @@ export class UsernameValidators{
 
   static shouldBeUnique(control: AbstractControl ): ValidationErrors | null {
     if(control.value == 'Mosh')
-     return { ValidationErrors: true, currentValue: control.value }
+     return {
+        shouldBeUnique:{invalid: true, currentValue: control.value}
+       };
     else
       return null;
   }
