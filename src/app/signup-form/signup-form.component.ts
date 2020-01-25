@@ -18,6 +18,7 @@ export class SignupFormComponent {
 
   })
   login(){
+
     this.form.setErrors({invalidLogin:true})
   }
 

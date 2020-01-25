@@ -1,5 +1,10 @@
-<form [formGroup]="form" (ngSubmit)="login">
-  <div class="alert alert-warning" *ngIf="form.errors">Invalid Log</div>
+<form [formGroup]="form" (ngSubmit)="login()">
+  <div 
+    class="alert alert-warning" 
+    *ngIf="form.errors">
+      Invalid Login
+    </div>
+    <p> {{ form.errors | json }} </p>
     <div class="form-group">
         <label for="username">Username</label>
         <input
@@ -17,7 +22,7 @@
         <div *ngIf="username.errors.cannotContainSpaces"> Username cannot contain spaces</div>
         <div *ngIf="username.errors.shouldBeUnique">The username {{username.errors.shouldBeUnique.currentValue}} is already taken</div>
       </div>
-      <p> {{ username.errors | json }} </p>
+      <p *ngIf="username.errors"> {{ username.errors | json }} </p>
     <div class="form-group">
         <label for="password">Password</label>
         <input 
@@ -31,6 +36,6 @@
       class="alert alert-danger">
       Password is required
     </div>
-    <p> {{ password.errors | json }} </p>
+    <p *ngIf="password.errors"> {{ password.errors | json }} </p>
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>
