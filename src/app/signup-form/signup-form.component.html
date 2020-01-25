@@ -7,13 +7,15 @@
             type="text" 
             class="form-control">
     </div>
-    <div 
+    <div (onKey)="onKeyup(username)" 
       class="alert alert-danger" 
       *ngIf="username.touched && username.invalid" >
         <div *ngIf="username.errors.minlength"> Username should be minimum {{ username.errors.minlength.requiredLength }} characters</div>
         <div *ngIf="username.errors.required"> Username is required</div>
-        <div *ngIf="username.errors.cannotContainSpaces"> Username cannot contain space</div>
+        <div *ngIf="username.errors.cannotContainSpaces"> Username cannot contain spaces</div>
+        <div *ngIf="username.errors.shouldBeUnique">The username {{username.errors.shouldBeUnique.currentValue}} is already taken</div>
       </div>
+      <p> {{ username.errors | json }} </p>
     <div class="form-group">
         <label for="password">Password</label>
         <input 

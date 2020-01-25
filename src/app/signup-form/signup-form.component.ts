@@ -12,12 +12,17 @@ export class SignupFormComponent {
     username: new FormControl('',[
       Validators.required,
       Validators.minLength(3),
-      UsernameValidators.cannotContainSpaces
+      UsernameValidators.cannotContainSpaces,
+      UsernameValidators.shouldBeUnique
     ]),
     password: new FormControl('',Validators.required)
 
   })
 
+  onKeyup(x){
+    console.log(x);
+  }
+  
   get username(){
     return this.form.get('username');
   }
