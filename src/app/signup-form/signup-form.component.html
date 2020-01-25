@@ -1,4 +1,5 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="login">
+  <div class="alert alert-warning" *ngIf="form.errors">Invalid Log</div>
     <div class="form-group">
         <label for="username">Username</label>
         <input
@@ -7,13 +8,14 @@
             type="text" 
             class="form-control">
     </div>
+    <div *ngIf="username.pending">Checking for uniqueness...</div>
     <div (onKey)="onKeyup(username)" 
       class="alert alert-danger" 
       *ngIf="username.touched && username.invalid" >
         <div *ngIf="username.errors.minlength"> Username should be minimum {{ username.errors.minlength.requiredLength }} characters</div>
         <div *ngIf="username.errors.required"> Username is required</div>
         <div *ngIf="username.errors.cannotContainSpaces"> Username cannot contain spaces</div>
-        <div *ngIf="username.errors.shouldBeUnique">The username {{username.errors.shouldBeUniquecurrentValue}} is already taken</div>
+        <div *ngIf="username.errors.shouldBeUnique">The username {{username.errors.shouldBeUnique.currentValue}} is already taken</div>
       </div>
       <p> {{ username.errors | json }} </p>
     <div class="form-group">

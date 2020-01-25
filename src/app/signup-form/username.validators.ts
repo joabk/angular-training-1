@@ -10,12 +10,18 @@ export class UsernameValidators{
     }
   }
 
-  static shouldBeUnique(control: AbstractControl ): ValidationErrors | null {
-    if(control.value == 'Mosh')
-     return {
-        shouldBeUnique:{invalid: true, currentValue: control.value}
-       };
-    else
-      return null;
+  static shouldBeUnique(control: AbstractControl ): Promise<ValidationErrors | null> {
+    return new Promise((resolve, reject)=>{
+      setTimeout(()=>{
+        if(control.value == 'Mosh')
+          resolve({shouldBeUnique:{invalid: true, currentValue: control.value}});      
+        else
+          resolve(null);
+      },2000)
+      
+    })
+    /*
+    
+    */
   }
 }
