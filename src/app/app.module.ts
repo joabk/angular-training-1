@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
-import { SignupFormComponent  } from './signup-form/signup-form.component'
+import { SignupFormComponent  } from './signup-form/signup-form.component';
+import { NewCoursesFormComponent } from './new-courses-form/new-courses-form.component'
 
 @NgModule({
   imports: [ 
@@ -15,7 +16,8 @@ import { SignupFormComponent  } from './signup-form/signup-form.component'
   declarations: [ 
     AppComponent, 
     HelloComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    NewCoursesFormComponent
     ],
   bootstrap: [ AppComponent ]
 })
