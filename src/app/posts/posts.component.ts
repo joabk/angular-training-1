@@ -36,9 +36,9 @@ export class PostsComponent implements OnInit {
         }, 
         (error: AppError )=>{
           if(error instanceof BadRequestError){
-              //this.form.setErrors(error.originalError());
+              //this.form.setErrors(error.originalError);
           }else{
-            alert('An unexpected error occurred ' + error);
+            throw error;
           }
         });
   }
@@ -59,9 +59,7 @@ export class PostsComponent implements OnInit {
       (error: AppError)=>{
         if(error instanceof BadRequestError){
           //this.form.setErrors(error.originalError);
-        }else{
-          alert('An unexpected error occurred' + error);
-        }        
+        }else throw error;    
       })
   }
   
@@ -79,9 +77,8 @@ export class PostsComponent implements OnInit {
         (error:AppError)=>{
           if(error instanceof NotFoundError)
             alert('This post has already been deleted')
-          else{
-            alert('An unexpected error occurred ' + error);
-            console.log(error);
+          else {
+            throw error;
           }            
         })
   }

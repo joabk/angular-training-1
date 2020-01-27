@@ -9,7 +9,9 @@ import { SignupFormComponent  } from './signup-form/signup-form.component';
 import { NewCoursesFormComponent } from './new-courses-form/new-courses-form.component';
 import { PostsComponent } from './posts/posts.component';
 import { ComputeService } from './common/services/compute.service';
-import { PostService } from './common/services/post.service'
+import { PostService } from './common/services/post.service';
+import { ErrorHandler } from '@angular/core';
+import { AppErrorHandler } from './common/errors/app-error-handler'
 
 @NgModule({
   imports: [ 
@@ -26,6 +28,10 @@ import { PostService } from './common/services/post.service'
     PostsComponent
     ],
   bootstrap: [ AppComponent ],
-  providers: [ComputeService, PostService]
+  providers: [
+    ComputeService, 
+    PostService,
+    { provide: ErrorHandler, useClass: AppErrorHandler }
+    ]
 })
 export class AppModule { }
