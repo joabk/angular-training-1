@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from './../common/services/post.service'
+import { PostService } from './../common/services/post.service';
+import { AppError } from './../common/errors/app-error';
+import { NotFoundError } from './../common/errors/not-found-error';
 
 @Component({
   selector: 'app-posts',
@@ -68,11 +70,13 @@ export class PostsComponent implements OnInit {
           let index = this.posts.indexOf(post);
           this.posts.splice(index,1);
         },
-        (error:Response)=>{
-          if(error.status === 404)
+        (error:AppError)=>{
+          if(error instanceof NotFoundError)
             alert('This post has already been deleted')
-          else
+          else{
             alert('An unexpected error occurred ' + error);
+            cnnsole.log(error);
+          }            
         })
   }
 
