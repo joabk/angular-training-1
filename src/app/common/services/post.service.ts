@@ -21,7 +21,14 @@ export class PostService {
   }
 
   updatePost(post){
-    return this.http.patch(this.url + '/' + post.id ,JSON.stringify(post));
+    return this.http.patch(this.url + '/' + post.id ,JSON.stringify(post))
+    .pipe(
+      catchError((error:Response)=>{
+        if(error.status === 400)
+          return throwError(new AppError(error));
+        
+      })
+    );
   }
 
   deletePost(id){

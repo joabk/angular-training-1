@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from './../common/services/post.service';
 import { AppError } from './../common/errors/app-error';
 import { NotFoundError } from './../common/errors/not-found-error';
+import { BadRequestError } from './../common/errors/bad-request-error'
 
 @Component({
   selector: 'app-posts',
@@ -33,12 +34,12 @@ export class PostsComponent implements OnInit {
           post['id'] = response.json().id;
           this.posts.splice(0,0,post);
         }, 
-        (error: Response)=>{
-          if(error.status === 400){
+        (error: AppError )=>{
+          if(error instanceof BadRequestError){
               //this.form.setErrors(error.json());
-          }
-          else
+          }else{
             alert('An unexpected error occurred ' + error);
+          }
         });
   }
 
@@ -54,8 +55,13 @@ export class PostsComponent implements OnInit {
           post.title = 'u'+post.title;
 
         this.posts.splice(index,1, post);
-      }, error=>{
-        alert('An unexpected error occurred' + error)
+      }, 
+      (error: AppError)=>{
+        if(error instanceof BadRequestError){
+          //this.form.setErrors(error.json());
+        }else{
+          alert('An unexpected error occurred' + error);
+        }        
       })
   }
   
@@ -75,7 +81,7 @@ export class PostsComponent implements OnInit {
             alert('This post has already been deleted')
           else{
             alert('An unexpected error occurred ' + error);
-            cnnsole.log(error);
+            console.log(error);
           }            
         })
   }
