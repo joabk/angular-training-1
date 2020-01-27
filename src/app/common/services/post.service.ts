@@ -4,7 +4,8 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 //import { Observable } from 'rxjs/observable'
 import { AppError } from './../errors/app-error';
-import { NotFoundError } from './../errors/not-found-error'
+import { NotFoundError } from './../errors/not-found-error';
+import { BadRequestError } from './../errors/bad-request-error'
 
 
 @Injectable()
@@ -25,8 +26,11 @@ export class PostService {
     .pipe(
       catchError((error:Response)=>{
         if(error.status === 400)
+          return throwError(new BadRequestError(error));
+        else{
           return throwError(new AppError(error));
-        
+          console.log(error);
+        }
       })
     );
   }

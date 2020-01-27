@@ -36,7 +36,7 @@ export class PostsComponent implements OnInit {
         }, 
         (error: AppError )=>{
           if(error instanceof BadRequestError){
-              //this.form.setErrors(error.json());
+              //this.form.setErrors(error.originalError());
           }else{
             alert('An unexpected error occurred ' + error);
           }
@@ -58,7 +58,7 @@ export class PostsComponent implements OnInit {
       }, 
       (error: AppError)=>{
         if(error instanceof BadRequestError){
-          //this.form.setErrors(error.json());
+          //this.form.setErrors(error.originalError);
         }else{
           alert('An unexpected error occurred' + error);
         }        
