@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http'
+import { PostService } from './../common/services/post.service'
 
 @Component({
   selector: 'app-posts',
@@ -8,13 +8,14 @@ import { Http } from '@angular/http'
 })
 export class PostsComponent implements OnInit {
   posts:any[];
-  private url = 'https://jsonplaceholder.typicode.com/posts';
-  constructor(private http:Http) {
+  
+  
+  constructor( private service:PostService) {
 
    }
 
   ngOnInit() {
-    this.http.get(this.url)
+    this.service.getPosts()
       .subscribe((response)=>{
         this.posts = response.json();
         //console.log(this.posts);
@@ -24,8 +25,7 @@ export class PostsComponent implements OnInit {
   createPost(input: HTMLInputElement){
     let post = { title:input.value}
     input.value = '';
-
-    this.http.post(this.url,JSON.stringify(post))
+    this.service.createPost(input)
       .subscribe((response)=>{
         post['id'] = response.json().id;
         this.posts.splice(0,0,post);
@@ -33,16 +33,26 @@ export class PostsComponent implements OnInit {
   }
 
   updatePost(post){
-    this.http.patch(this.url + '/' + post.id ,JSON.stringify(post))
+    let random = this.randomIntFromInterval(1,2);
+    this.service.updatePost(post)
       .subscribe((response)=>{
         let index = this.posts.indexOf(post);
-        
-        //post = 'xx';
+
+        if(random === 1)
+          post.title = post.title.substr(0,post.title.length-1);
+        else
+          post.title = 'u'+post.title;
+
+        this.posts.splice(index,1, post);
       })
+  }
+  
+  randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   deletePost(post){
-    this.http.delete(this.url + '/' + post.id)
+    this.deletePost(p)
       .subscribe((response)=>{
         let index = this.posts.indexOf(post);
         this.posts.splice(index,1);

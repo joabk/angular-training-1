@@ -7,7 +7,9 @@ import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
 import { SignupFormComponent  } from './signup-form/signup-form.component';
 import { NewCoursesFormComponent } from './new-courses-form/new-courses-form.component';
-import { PostsComponent } from './posts/posts.component'
+import { PostsComponent } from './posts/posts.component';
+import { ComputeService } from './common/services/compute.service';
+import { PostService } from './common/services/post.service'
 
 @NgModule({
   imports: [ 
@@ -23,6 +25,7 @@ import { PostsComponent } from './posts/posts.component'
     NewCoursesFormComponent,
     PostsComponent
     ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  providers: [ComputeService, PostService]
 })
 export class AppModule { }
