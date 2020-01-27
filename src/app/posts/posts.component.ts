@@ -51,8 +51,8 @@ export class PostsComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  deletePost(post){
-    this.deletePost(p)
+  deletePost(post){    
+    this.service.deletePost(post.id)
       .subscribe((response)=>{
         let index = this.posts.indexOf(post);
         this.posts.splice(index,1);

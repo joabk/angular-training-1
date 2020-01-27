@@ -18,7 +18,7 @@ export class PostService {
     return this.http.patch(this.url + '/' + post.id ,JSON.stringify(post));
   }
 
-  deletePost(post){
-    return this.http.delete(this.url + '/' + post.id);
+  deletePost(id){
+    return this.http.delete(this.url + '/' + id);
   }
 }
