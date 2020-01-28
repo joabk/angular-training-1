@@ -18,33 +18,34 @@ export class PostService {
   }
 
   createPost(post){
-    return this.http.post(this.url,JSON.stringify(post));
+    return this.http.post(this.url,JSON.stringify(post))
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   updatePost(post){
     return this.http.patch(this.url + '/' + post.id ,JSON.stringify(post))
     .pipe(
-      catchError((error:Response)=>{
-        if(error.status === 400)
-          return throwError(new BadRequestError(error));
-        else{
-          return throwError(new AppError(error));
-          console.log(error);
-        }
-      })
+      catchError(this.handleError)
     );
   }
 
   deletePost(id){
     return this.http.delete(this.url + '/' + id).pipe(
-      catchError((error)=>{
-        if(error.status === 404)
-          return throwError(new NotFoundError())
-        else{
-          console.log('Handle and rethrowing ...', error);
-          return throwError(new AppError(error));
-        }
-      })
+      catchError(this.handleError)
     );
   }
+
+  private handleError(error:Response){
+    if(error.status === 404)
+          return throwError(new NotFoundError())
+    else if(error.status === 400)
+          return throwError(new BadRequestError(error));
+    else{
+      console.log('Handle and rethrowing ...', error);
+      return throwError(new AppError(error));
+    }
+  }
+
 }
