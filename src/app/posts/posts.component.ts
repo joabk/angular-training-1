@@ -19,7 +19,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.service.getData()
-      .subscribe((post)=> this.posts= post );
+      .subscribe(post=> this.posts= post );
   }
 
   createPost(input: HTMLInputElement){
