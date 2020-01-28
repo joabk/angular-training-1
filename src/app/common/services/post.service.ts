@@ -10,7 +10,7 @@ import { BadRequestError } from './../errors/bad-request-error'
 
 @Injectable()
 export class PostService {
-  private url = 'https://jsonplaceholder.typicode.com/posts';
+  private url = 'https://abcdjsonplaceholder.typicode.com/posts';
   constructor(private http: Http) { }
 
   getPosts(){
