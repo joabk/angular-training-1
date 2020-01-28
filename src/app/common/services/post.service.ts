@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {HttpDataService } from 'http.data.service';
+import {HttpDataService } from '.http.data.service';
 
 
 @Injectable()

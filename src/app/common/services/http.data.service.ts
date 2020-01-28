@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-//import { Observable } from 'rxjs/observable'
 import { AppError } from './../errors/app-error';
 import { NotFoundError } from './../errors/not-found-error';
 import { BadRequestError } from './../errors/bad-request-error'
