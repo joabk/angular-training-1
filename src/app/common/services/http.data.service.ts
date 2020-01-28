@@ -29,12 +29,14 @@ export class HttpDataService {
   update(resource){
     return this.http.patch(this.url + '/' + resource.id ,JSON.stringify(resource))
     .pipe(
+      map(resource=>resource.json()),
       catchError(this.handleError)
     );
   }
 
   delete(id){
     return this.http.delete(this.url + '/' + id).pipe(
+      map(resource=>resource.json()),
       catchError(this.handleError)
     );
   }
