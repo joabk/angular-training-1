@@ -48,9 +48,9 @@ export class PostsComponent implements OnInit {
     let random = this.randomIntFromInterval(1,2);
     let newpost;
     if(random === 1)
-      newpost.title = newpost.title.substr(0,newpost.title.length-1);
+      newpost.title = post.title.substr(0,post.title.length-1);
     else
-      newpost.title = 'u'+newpost.title;
+      newpost.title = 'u'+post.title;
     
     this.posts.splice(index,1, newpost);
 
