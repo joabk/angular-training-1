@@ -27,8 +27,8 @@ export class PostsComponent implements OnInit {
     input.value = '';
     this.service.create(input)
       .subscribe(
-        (response)=>{
-          post['id'] = response.json(.id;
+        (newPost)=>{
+          post['id'] = newPost.id;
           this.posts.splice(0,0,post);
         }, 
         (error: AppError )=>{
@@ -43,7 +43,7 @@ export class PostsComponent implements OnInit {
   updatePost(post){
     let random = this.randomIntFromInterval(1,2);
     this.service.update(post)
-      .subscribe((response)=>{
+      .subscribe((updatedPost)=>{
         let index = this.posts.indexOf(post);
 
         if(random === 1)
@@ -51,6 +51,7 @@ export class PostsComponent implements OnInit {
         else
           post.title = 'u'+post.title;
 
+        console.log('Updated post', updatedPost)
         this.posts.splice(index,1, post);
       }, 
       (error: AppError)=>{
@@ -67,7 +68,7 @@ export class PostsComponent implements OnInit {
   deletePost(post){    
     this.service.delete(post.id)
       .subscribe(
-        (response)=>{
+        ()=>{
           let index = this.posts.indexOf(post);
           this.posts.splice(index,1);
         },
