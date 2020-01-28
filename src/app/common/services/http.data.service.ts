@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { catchError, map,retry, retryWhen } from 'rxjs/operators';
+import { catchError, map,retry, retryWhen,delay, take } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { AppError } from './../errors/app-error';
 import { NotFoundError } from './../errors/not-found-error';
@@ -37,8 +37,9 @@ export class HttpDataService {
   delete(id){
     return this.http.delete(this.url + '/' + id).pipe(
       map(resource=>resource.json()),
-      retry(3),
-      catchError(this.handleError)
+      //retry(3),
+        retryWhen(errors => errors.delay(1000).take(10)),
+        catchError(this.handleError)
     );
   }
 
