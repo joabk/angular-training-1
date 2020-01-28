@@ -76,10 +76,7 @@ export class PostsComponent implements OnInit {
 
     this.service.delete(post.id)
       .subscribe(
-        ()=>{
-          let index = this.posts.indexOf(post);
-          this.posts.splice(index,1);
-        },
+        null,
         (error:AppError)=>{
           this.posts.splice(index,0, post);
           if(error instanceof NotFoundError)
