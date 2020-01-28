@@ -24,14 +24,17 @@ export class PostsComponent implements OnInit {
 
   createPost(input: HTMLInputElement){
     let post = { title:input.value}
+    this.posts.splice(0,0,post);
+
     input.value = '';
+
     this.service.create(input)
       .subscribe(
         (newPost)=>{
-          post['id'] = newPost.id;
-          this.posts.splice(0,0,post);
+          post['id'] = newPost.id;          
         }, 
         (error: AppError )=>{
+          this.posts.splice(0,1);
           if(error instanceof BadRequestError){
               //this.form.setErrors(error.originalError);
           }else{
@@ -41,20 +44,22 @@ export class PostsComponent implements OnInit {
   }
 
   updatePost(post){
+    let index = this.posts.indexOf(post);
     let random = this.randomIntFromInterval(1,2);
+    let newpost;
+    if(random === 1)
+      newpost.title = newpost.title.substr(0,newpost.title.length-1);
+    else
+      newpost.title = 'u'+newpost.title;
+    
+    this.posts.splice(index,1, newpost);
+
     this.service.update(post)
-      .subscribe((updatedPost)=>{
-        let index = this.posts.indexOf(post);
-
-        if(random === 1)
-          post.title = post.title.substr(0,post.title.length-1);
-        else
-          post.title = 'u'+post.title;
-
-        console.log('Updated post', updatedPost)
-        this.posts.splice(index,1, post);
+      .subscribe((updatedPost)=>{        
+        console.log('Updated post', updatedPost);
       }, 
       (error: AppError)=>{
+        this.posts.splice(index,1,post);
         if(error instanceof BadRequestError){
           //this.form.setErrors(error.originalError);
         }else throw error;    
@@ -65,7 +70,10 @@ export class PostsComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  deletePost(post){    
+  deletePost(post){
+    let index = this.posts.indexOf(post);
+    this.posts.splice(index,1);
+
     this.service.delete(post.id)
       .subscribe(
         ()=>{
@@ -73,6 +81,7 @@ export class PostsComponent implements OnInit {
           this.posts.splice(index,1);
         },
         (error:AppError)=>{
+          this.posts.splice(index,0, post);
           if(error instanceof NotFoundError)
             alert('This post has already been deleted')
           else {
