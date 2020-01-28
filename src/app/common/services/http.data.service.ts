@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { AppError } from './../errors/app-error';
 import { NotFoundError } from './../errors/not-found-error';
@@ -12,7 +12,11 @@ export class HttpDataService {
   constructor(private url: string, private http: Http) { }
 
   getData(){
-    return this.http.get(this.url);
+    return this.http.get(this.url)
+      .pipe(
+        map(response => response.json()),
+        catchError(this.handleError)
+      )
   }
 
   create(resource){
