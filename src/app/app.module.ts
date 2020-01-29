@@ -11,7 +11,7 @@ import { MockBackend } from '@angular/http/testing';
 import { fakeBackendProvider } from './authentication/helpers/fake-backend';
 import { AuthService } from './authentication/services/auth.service';
 
-import { HomeComponent } from './/home/home.component';
+import { HomeComponent } from './authentication/home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { SignupComponent } from './authentication/signup/signup.component';
 import { AdminComponent } from './authentication/admin/admin.component';
@@ -41,8 +41,8 @@ import { AppErrorHandler } from './common/errors/app-error-handler'
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot([
-      { path: 'home', component: HomeComponent },
-      { path: 'github', component: HomeComponent },
+      { path: '', component: HomeComponent },
+      //{ path: 'github', component: HomeComponent },
       { 
         path: 'followers/:username', 
         component: GithubProfileComponent 
@@ -72,6 +72,7 @@ import { AppErrorHandler } from './common/errors/app-error-handler'
     ComputeService, 
     PostService,
     GithubFollowersService,
+    AuthService,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ]
 })
