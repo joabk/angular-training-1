@@ -27,6 +27,7 @@ import { NewCoursesFormComponent } from './new-courses-form/new-courses-form.com
 import { PostsComponent } from './posts/posts.component';
 import { GithubFollowersComponent } from './github-followers/github-followers.component';
 import { GithubProfileComponent } from './github-profile/github-profile.component';
+import { GithubFollowersService } from './services/github/github-followers.service.ts';
 
 import { ComputeService } from './common/services/compute.service';
 import { PostService } from './common/services/post.service';
@@ -70,7 +71,8 @@ import { AppErrorHandler } from './common/errors/app-error-handler'
   providers: [
     ComputeService, 
     PostService,
+    GithubFollowersService,
     { provide: ErrorHandler, useClass: AppErrorHandler }
-    ]
+  ]
 })
 export class AppModule { }
