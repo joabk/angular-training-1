@@ -19,6 +19,6 @@ export class GithubProfileComponent implements OnInit {
   }
 
   toFollowers(){
-    this.router.navigate("[/followers]", {queryParams={page:1, order: 'newest'})
+    this.router.navigate("['/followers'], {queryParams:{page:1, order: 'newest'}})
   }
 }
