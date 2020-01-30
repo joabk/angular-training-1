@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class GithubProfileService extends DataService {
   constructor(url,http: Http) {
-    super(url, http);
+    super('http://jsonplaceholder.typicode.com/posts', http);
    }
 }

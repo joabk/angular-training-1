@@ -2,7 +2,7 @@ import { GithubFollowersService } from './../services/github/github-followers.se
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 //import { Observable } from 'rxjs/Observable';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'github-followers',
@@ -15,7 +15,7 @@ export class GithubFollowersComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: GithubFollowersService) { }
 
   ngOnInit() {
-    Observable.combineLatest([
+    combineLatest([
       this.route.paramMap,
       this.route.queryParamMap
     ])
@@ -41,7 +41,7 @@ export class GithubFollowersComponent implements OnInit {
     this.route.snapshot.queryParamMap.get('page');
     this.route.snapshot.queryParamMap.get('order');
     */
-    this.service.getAll('http://jsonplaceholder.typicode.com/posts')
+    this.service.getAll('https://api.github.com/users/mosh-hamedani/followers')
       .subscribe(followers => this.followers = followers);
   }
 }
