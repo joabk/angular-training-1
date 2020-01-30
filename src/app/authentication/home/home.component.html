@@ -5,7 +5,7 @@
 </p>
 <ul>
   <li 
-    *ngIf="authService.isLoggedin() && 
+    *ngIf="authService.isLoggedIn() && 
     authService.currentUser.admin">
     <a routerLink="/admin">Admin</a></li>
   <li *ngIf="!authService.isLoggedin()"><a routerLink="/login">Login</a></li>
