@@ -1,5 +1,8 @@
 import { GithubFollowersService } from './../services/github/github-followers.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+//import { Observable } from 'rxjs/Observable';
+import { combineLatest, Observable } from 'rxjs';
 
 @Component({
   selector: 'github-followers',
@@ -9,10 +12,36 @@ import { Component, OnInit } from '@angular/core';
 export class GithubFollowersComponent implements OnInit {
   followers: any[];
 
-  constructor(private service: GithubFollowersService) { }
+  constructor(private route: ActivatedRoute, private service: GithubFollowersService) { }
 
   ngOnInit() {
-    this.service.getAll()
+    Observable.combineLatest([
+      this.route.paramMap,
+      this.route.queryParamMap
+    ])
+      .subscribe((combined)=>{
+        let id = combined[0].get('id');
+        let page = combined[1].get('page');
+        let order = combined[1].get('order');
+        //this.service.getAll({id:id,page:page,order:order});
+      })
+
+    /*
+    this.route.paramMap.subscribe((params)=>{
+
+    });
+
+    this.route.queryParamMap.subscribe((params)=>{
+      console.log(` 
+          The optional params are ${params.get('page')}
+          and  ${params.get('order')}      
+      `)
+    })
+    //Below is just an illustration of how to get the optional params
+    this.route.snapshot.queryParamMap.get('page');
+    this.route.snapshot.queryParamMap.get('order');
+    */
+    this.service.getAll('http://jsonplaceholder.typicode.com/posts')
       .subscribe(followers => this.followers = followers);
   }
 }
