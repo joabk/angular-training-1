@@ -32,7 +32,7 @@ export class AuthService {
     let jwtHelper = new JwtHelper();
 
     let token = localStorage.getItem('token');
-    if(token)
+    if(!token)
       return false;
 
     let expirationDate = jwtHelper.getTokenExpirationDate(token);
