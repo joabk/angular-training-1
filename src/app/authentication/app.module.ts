@@ -19,6 +19,7 @@ import { AdminComponent } from './admin/admin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AuthGuardService } from './services/auth-guard.service';
     fakeBackendProvider,
     MockBackend,
     BaseRequestOptions,
-    AuthGuardService
+    AuthGuardService,
+    AdminAuthGuardService
   ],
   bootstrap: [AppComponent]
 })

@@ -47,10 +47,12 @@ import { AppErrorHandler } from "./common/errors/app-error-handler";
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot([
-      { path: "", component: HomeComponent },
+      { path: "", component: LoginComponent },
+      { path: "home", component: HomeComponent },
       { path: "login", component: LoginComponent },
       { path: "no-access", component: NoAccessComponent },
-      { path: "admin", component: AdminComponent, canActivate: [AuthGuard] },
+      { 
+        path: "admin", component: AdminComponent, canActivate: [AuthGuard] },
       //{ path: 'github', component: HomeComponent },
       {
         path: "followers/:id, /:username",
