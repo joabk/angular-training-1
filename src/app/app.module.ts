@@ -42,6 +42,9 @@ import { AppErrorHandler } from './common/errors/app-error-handler'
     HttpModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
+      {path: 'no-access', component: NoAccessComponent },
+      { path: '', component: AdminComponent },
       //{ path: 'github', component: HomeComponent },
       { 
         path: 'followers/:id, /:username', 
@@ -65,11 +68,17 @@ import { AppErrorHandler } from './common/errors/app-error-handler'
     NotFoundComponent,
     GithubFollowersComponent,
     GithubProfileComponent,
-    NavbarComponent
+    NavbarComponent,
+    NoAccessComponent
     ],
   bootstrap: [ AppComponent ],
   providers: [
-    ComputeService, 
+    ComputeService,
+    OrderService,
+    AuthService,
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions, 
     PostService,
     GithubFollowersService,
     AuthService,
