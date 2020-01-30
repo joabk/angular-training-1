@@ -18,6 +18,7 @@ import { AdminComponent } from './authentication/admin/admin.component';
 import { NotFoundComponent } from './authentication/not-found/not-found.component';
 import { NoAccessComponent } from './authentication/no-access/no-access.component';
 import { NavbarComponent } from './navbar/navbar.component'
+import { AuthGuard } from './authentication/services/auth-guard.service';
 
 // END OF AUTHENTICATION IMPORTS
 import { AppComponent } from './app.component';
@@ -43,8 +44,8 @@ import { AppErrorHandler } from './common/errors/app-error-handler'
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
-      {path: 'no-access', component: NoAccessComponent },
-      { path: '', component: AdminComponent },
+      { path: 'no-access', component: NoAccessComponent },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
       //{ path: 'github', component: HomeComponent },
       { 
         path: 'followers/:id, /:username', 
@@ -82,6 +83,7 @@ import { AppErrorHandler } from './common/errors/app-error-handler'
     PostService,
     GithubFollowersService,
     AuthService,
+    AuthGuard,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ]
 })

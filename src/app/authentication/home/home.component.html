@@ -1,13 +1,15 @@
 
 <h3>Home Page</h3>  
-<p *ngIf="authService.isLoggedin">
+<p *ngIf="authService.isLoggedIn">
   Wexlcome {{authService?.currentUser.name}}
 </p>
 <ul>
   <li 
     *ngIf="authService.isLoggedIn() && 
     authService.currentUser.admin">
-    <a routerLink="/admin">Admin</a></li>
-  <li *ngIf="!authService.isLoggedin()"><a routerLink="/login">Login</a></li>
+    <a 
+      routerLink="/admin">
+      Admin</a></li>
+  <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login">Login</a></li>
   <li><a (click)="authService.logout()">Logout</a></li>
 </ul>
