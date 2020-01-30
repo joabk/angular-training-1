@@ -24,6 +24,7 @@ import { NotFoundComponent } from "./authentication/not-found/not-found.componen
 import { NoAccessComponent } from "./authentication/no-access/no-access.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AuthGuard } from "./authentication/services/auth-guard.service";
+import { AdminAuthGuard } from "./authentication/services/admin-auth-guard.service";
 
 // END OF AUTHENTICATION IMPORTS
 import { AppComponent } from "./app.component";
@@ -52,7 +53,10 @@ import { AppErrorHandler } from "./common/errors/app-error-handler";
       { path: "login", component: LoginComponent },
       { path: "no-access", component: NoAccessComponent },
       { 
-        path: "admin", component: AdminComponent, canActivate: [AuthGuard] },
+        path: "admin", 
+        component: AdminComponent, 
+        canActivate: [AuthGuard, AdminAuthGuard] 
+      },
       //{ path: 'github', component: HomeComponent },
       {
         path: "followers/:id, /:username",
@@ -91,6 +95,7 @@ import { AppErrorHandler } from "./common/errors/app-error-handler";
     GithubFollowersService,
     AuthService,
     AuthGuard,
+    AdminAuthGuard,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ]
 })
