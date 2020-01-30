@@ -27,7 +27,8 @@ export class GithubFollowersComponent implements OnInit {
       
       this.service.getAll()
           .subscribe(followers => this.followers = followers);
-    })
+    });
+    
     /*
     this.route.paramMap.subscribe((params)=>{
 
