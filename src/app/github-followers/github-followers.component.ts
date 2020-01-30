@@ -24,6 +24,9 @@ export class GithubFollowersComponent implements OnInit {
         let page = combined[1].get('page');
         let order = combined[1].get('order');
         //this.service.getAll({id:id,page:page,order:order});
+
+        this.service.getAll().
+          .subscribe(followers => this.followers = followers);
       })
 
     /*
@@ -41,7 +44,6 @@ export class GithubFollowersComponent implements OnInit {
     this.route.snapshot.queryParamMap.get('page');
     this.route.snapshot.queryParamMap.get('order');
     */
-    this.service.getAll('https://api.github.com/users/mosh-hamedani/followers')
-      .subscribe(followers => this.followers = followers);
+    
   }
 }
